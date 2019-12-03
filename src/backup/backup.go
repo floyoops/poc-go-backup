@@ -1,13 +1,26 @@
 package main
 
 import (
+	app "backupYmlToFtp/src/backup/app/query"
+	domain2 "backupYmlToFtp/src/backup/domain/adapter"
+	domain "backupYmlToFtp/src/backup/domain/repository"
+	"backupYmlToFtp/src/backup/infra/adapter"
+	infra "backupYmlToFtp/src/backup/infra/repository"
 	"fmt"
 	"log"
 	"os"
 )
 
 func main() {
-	// get args.
+	// bootstrap handler
+	var fileRepo domain.FileRepository = infra.FileRepository{}
+	var converter domain2.ConvertToParametersDb = adapter.YmlToParameters{}
+	var handler = app.GetParametersDbQueryHandler{
+		fileRepo,
+		converter,
+	}
+
+	// cli get args.
 	args := os.Args
 	if len(args) < 2 {
 		fmt.Println("Please enter a yml file path")
@@ -15,19 +28,14 @@ func main() {
 	}
 	pathFile := args[1]
 
-	// Open.
-	byteValue, err := GetContent(pathFile)
-	if err != nil {
-		log.Fatalf("error on open file: %v\n", err)
-		os.Exit(1)
-	}
-
-	// Unmarshal
-	p, err := YmlToParameters(byteValue)
-	if err != nil {
+	// query
+	query := app.GetParameterDbQuery{pathFile}
+	p, error := handler.Handle(query)
+	if error != nil {
 		log.Fatal("error on yml to parameters")
 		os.Exit(1)
 	}
-	fmt.Printf("unmarshall %v success\n", pathFile)
+
+	// render
 	fmt.Printf("dbs %v", p.Parameters)
 }

@@ -1,4 +1,4 @@
-package main
+package infra
 
 import (
 	"fmt"
@@ -6,7 +6,10 @@ import (
 	"os"
 )
 
-func Exists(name string) bool {
+type FileRepository struct {
+}
+
+func (r FileRepository) exists(name string) bool {
 	if _, err := os.Stat(name); err != nil {
 		if os.IsNotExist(err) {
 			return false
@@ -15,9 +18,9 @@ func Exists(name string) bool {
 	return true
 }
 
-func GetContent(pathFile string) ([]byte, error) {
+func (r FileRepository) GetContent(pathFile string) ([]byte, error) {
 	// Check if file exist.
-	if Exists(pathFile) == false {
+	if r.exists(pathFile) == false {
 		fmt.Errorf("the file '%v' does not exist\n", pathFile)
 	}
 	fmt.Printf("Arg path file yml detected: %v\n", pathFile)

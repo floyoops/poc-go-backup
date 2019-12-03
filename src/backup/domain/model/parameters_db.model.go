@@ -1,10 +1,4 @@
-package main
-
-import (
-	"gopkg.in/yaml.v2"
-	"log"
-	"os"
-)
+package domain
 
 type ParametersDb struct {
 	Parameters struct {
@@ -15,17 +9,4 @@ type ParametersDb struct {
 		DbUser     string `yaml:"database_user"`
 		DbPassword string `yaml:"database_password"`
 	}
-}
-
-func YmlToParameters(byteValue []byte) (ParametersDb, error) {
-
-	// Unmarshal
-	p := ParametersDb{}
-	err := yaml.Unmarshal([]byte(byteValue), &p)
-	if err != nil {
-		log.Fatalf("error: %v", err)
-		os.Exit(1)
-	}
-
-	return p, err
 }
