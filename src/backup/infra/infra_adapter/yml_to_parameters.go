@@ -22,12 +22,11 @@ func (c YmlToParameters) Convert(byteValue []byte) (model.ParametersDb, error)  
 	if err2 != nil {
 		fmt.Errorf("error %v", err2)
 	}
-	p.Parameters.DbDriver = result["parameters"]["database_driver"]
-	p.Parameters.DbHost = result["parameters"]["database_host"]
-	p.Parameters.DbPort = result["parameters"]["database_port"]
-	p.Parameters.DbName = result["parameters"]["database_name"]
-	p.Parameters.DbUser = result["parameters"]["database_user"]
-	p.Parameters.DbPassword = result["parameters"]["database_password"]
+	p.DbHost = result["parameters"]["database_host"]
+	p.DbPort = result["parameters"]["database_port"]
+	p.DbName = result["parameters"]["database_name"]
+	p.DbUser = result["parameters"]["database_user"]
+	p.DbPassword = result["parameters"]["database_password"]
 
 	return p, err
 }

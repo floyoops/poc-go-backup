@@ -37,5 +37,5 @@ func main() {
 	}
 
 	// render
-	fmt.Printf("dbs %v", p.Parameters)
+	fmt.Printf("dbs %v", p)
 }
