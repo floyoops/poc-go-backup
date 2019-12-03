@@ -1,17 +1,17 @@
-package adapter
+package infra_adapter
 
 import (
-	domain "backupYmlToFtp/src/backup/domain/model"
 	"fmt"
+	"github.com/floyoops/poc-go-backup/src/backup/domain/model"
 	"gopkg.in/yaml.v2"
 )
 
 type YmlToParameters struct {
 }
 
-func (c YmlToParameters) Convert(byteValue []byte) (domain.ParametersDb, error)  {
+func (c YmlToParameters) Convert(byteValue []byte) (model.ParametersDb, error)  {
 	// Unmarshal
-	p := domain.ParametersDb{}
+	p := model.ParametersDb{}
 	err := yaml.Unmarshal([]byte(byteValue), &p)
 	if err != nil {
 		fmt.Errorf("error: %v", err)

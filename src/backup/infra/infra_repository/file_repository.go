@@ -1,4 +1,4 @@
-package infra
+package infra_repository
 
 import (
 	"fmt"

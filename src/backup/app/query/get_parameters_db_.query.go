@@ -1,4 +1,4 @@
-package app
+package query
 
 type GetParameterDbQuery struct {
 	PathFile string

@@ -1,21 +1,21 @@
 package main
 
 import (
-	app "backupYmlToFtp/src/backup/app/query"
-	domain2 "backupYmlToFtp/src/backup/domain/adapter"
-	domain "backupYmlToFtp/src/backup/domain/repository"
-	"backupYmlToFtp/src/backup/infra/adapter"
-	infra "backupYmlToFtp/src/backup/infra/repository"
 	"fmt"
+	"github.com/floyoops/poc-go-backup/src/backup/app/query"
+	"github.com/floyoops/poc-go-backup/src/backup/domain/adapter"
+	"github.com/floyoops/poc-go-backup/src/backup/domain/repository"
+	"github.com/floyoops/poc-go-backup/src/backup/infra/infra_adapter"
+	"github.com/floyoops/poc-go-backup/src/backup/infra/infra_repository"
 	"log"
 	"os"
 )
 
 func main() {
 	// bootstrap handler
-	var fileRepo domain.FileRepository = infra.FileRepository{}
-	var converter domain2.ConvertToParametersDb = adapter.YmlToParameters{}
-	var handler = app.GetParametersDbQueryHandler{
+	var fileRepo repository.FileRepository = infra_repository.FileRepository{}
+	var converter adapter.ConvertToParametersDb = infra_adapter.YmlToParameters{}
+	var handler = query.GetParametersDbQueryHandler{
 		fileRepo,
 		converter,
 	}
@@ -29,8 +29,8 @@ func main() {
 	pathFile := args[1]
 
 	// query
-	query := app.GetParameterDbQuery{pathFile}
-	p, error := handler.Handle(query)
+	q := query.GetParameterDbQuery{pathFile}
+	p, error := handler.Handle(q)
 	if error != nil {
 		log.Fatal("error on yml to parameters")
 		os.Exit(1)

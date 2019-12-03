@@ -1,7 +1,7 @@
-package domain
+package adapter
 
-import domain "backupYmlToFtp/src/backup/domain/model"
+import "github.com/floyoops/poc-go-backup/src/backup/domain/model"
 
 type ConvertToParametersDb interface {
-	Convert(bytes []byte) (domain.ParametersDb, error)
+	Convert(bytes []byte) (model.ParametersDb, error)
 }

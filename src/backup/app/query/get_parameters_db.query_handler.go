@@ -1,18 +1,18 @@
-package app
+package query
 
 import (
-	d2 "backupYmlToFtp/src/backup/domain/adapter"
-	d3 "backupYmlToFtp/src/backup/domain/model"
-	d1 "backupYmlToFtp/src/backup/domain/repository"
 	"fmt"
+	"github.com/floyoops/poc-go-backup/src/backup/domain/adapter"
+	"github.com/floyoops/poc-go-backup/src/backup/domain/model"
+	"github.com/floyoops/poc-go-backup/src/backup/domain/repository"
 )
 
 type GetParametersDbQueryHandler struct {
-	Repository d1.FileRepository
-	Adapter    d2.ConvertToParametersDb
+	Repository repository.FileRepository
+	Adapter    adapter.ConvertToParametersDb
 }
 
-func (Qh GetParametersDbQueryHandler) Handle(query GetParameterDbQuery) (d3.ParametersDb, error)  {
+func (Qh GetParametersDbQueryHandler) Handle(query GetParameterDbQuery) (model.ParametersDb, error)  {
 	bytesYml, error := Qh.Repository.GetContent(query.PathFile)
 	if error != nil {
 		fmt.Errorf(
