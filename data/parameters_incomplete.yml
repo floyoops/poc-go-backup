@@ -1,0 +1,3 @@
+parameters:
+    database_driver:   'pdo_mysql'
+    database_host:     'db'

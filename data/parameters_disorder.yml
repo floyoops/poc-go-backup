@@ -1,0 +1,23 @@
+parameters:
+    database_password: root_password
+
+    mailer_transport:  smtp
+    mailer_host:       the_host_smtp
+    mailer_user:       ~
+    database_name:     the_db_name
+    mailer_password:   ~
+    mailer_port:       1025
+    database_driver:   'pdo_mysql'
+    database_user:     root
+    locale:            en
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    wkhtmltopdf_path:  /opt/wkhtmltox/bin/wkhtmltopdf
+    nodejs_server:     'nodejs:3000'
+
+    genpdf_mail: root@localhost
+    database_host:     'db'
+    genpdf_path: '/path/of/document/pdf'
+    genpdf_url: 'http://url-project/for/generate/pdf'
+    monolog_mail: root@localhost
+    database_port:     ~

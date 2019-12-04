@@ -1,0 +1,6 @@
+parameters:
+    database_host:     'db'
+    database_port:     ~
+    database_name:     the_db_name
+    database_user:     root
+    database_password: root_password
