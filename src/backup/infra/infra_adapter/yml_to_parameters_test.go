@@ -69,7 +69,7 @@ func TestYmlIncompleteFail(t *testing.T)  {
 }
 
 func TestFail(t *testing.T)  {
-	byteValues := []byte("ABC€")
+	byteValues := []byte("ABC€") // not bytes from yml.
 	converter := YmlToParameters{}
 	_, errorConvert := converter.Convert(byteValues)
 	if errorConvert == nil {

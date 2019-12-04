@@ -16,8 +16,8 @@ func main() {
 	var fileRepo repository.FileRepository = infra_repository.FileRepository{}
 	var converter adapter.ConvertToParametersDb = infra_adapter.YmlToParameters{}
 	var handler = query.GetParametersDbQueryHandler{
-		fileRepo,
-		converter,
+		Repository: fileRepo,
+		Adapter:    converter,
 	}
 
 	// cli get args.
@@ -29,10 +29,10 @@ func main() {
 	pathFile := args[1]
 
 	// query
-	q := query.GetParameterDbQuery{pathFile}
-	p, error := handler.Handle(q)
-	if error != nil {
-		log.Fatal("error on yml to parameters")
+	q := query.GetParameterDbQuery{PathFile: pathFile}
+	p, err := handler.Handle(q)
+	if err != nil {
+		log.Fatal("err on yml to parameters")
 		os.Exit(1)
 	}
 
