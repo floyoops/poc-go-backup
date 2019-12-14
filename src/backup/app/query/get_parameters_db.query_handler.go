@@ -13,12 +13,12 @@ type GetParametersDbQueryHandler struct {
 }
 
 func (Qh GetParametersDbQueryHandler) Handle(query GetParameterDbQuery) (model.ParametersDb, error)  {
-	bytesYml, error := Qh.Repository.GetContent(query.PathFile)
-	if error != nil {
-		fmt.Errorf(
+	bytesYml, err := Qh.Repository.GetContent(query.PathFile)
+	if err != nil {
+		return model.ParametersDb{}, fmt.Errorf(
 			"Error GetParametersDbQueryHandler on get content of file '%v'\n, previous: '%v'",
 			query.PathFile,
-			error,
+			err,
 		)
 	}
 	return Qh.Adapter.Convert(bytesYml)

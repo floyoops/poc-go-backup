@@ -31,7 +31,7 @@ func main() {
 	q := query.GetParameterDbQuery{PathFile: pathFile}
 	p, err := handler.Handle(q)
 	if err != nil {
-		log.Fatal("err on yml to parameters")
+		log.Fatal("err on yml to parameters, detail: ", err)
 		os.Exit(1)
 	}
 

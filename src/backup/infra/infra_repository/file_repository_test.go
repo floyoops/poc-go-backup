@@ -13,7 +13,7 @@ func TestGetContentSuccess(t *testing.T)  {
 func TestFileNotExist(t *testing.T)  {
 	repo := FileRepository{}
 	_, err := repo.GetContent("fake")
-	if err.Error() != "the file 'fake' does not exist\n" {
+	if err != nil && err.Error() != "the file 'fake' does not exist\n" {
 		t.Errorf("no")
 	}
 }

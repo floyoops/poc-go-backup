@@ -40,5 +40,5 @@ func (r FileRepository) GetContent(pathFile string) ([]byte, error) {
 	}
 	fmt.Printf("Read success")
 
-	return byteValue, err
+	return byteValue, nil
 }
