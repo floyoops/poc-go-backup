@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"github.com/floyoops/poc-go-backup/src/backup/app/query"
 	"github.com/floyoops/poc-go-backup/src/backup/domain/adapter"
@@ -21,12 +22,10 @@ func main() {
 	}
 
 	// cli get args.
-	args := os.Args
-	if len(args) < 2 {
-		fmt.Println("Please enter a yml file path")
-		os.Exit(1)
-	}
-	pathFile := args[1]
+	var pathFile string
+	flag.StringVar(&pathFile,"f", "data/parameters.yml", "help message for ip")
+	flag.Parse()
+	fmt.Println("pathFile has value ", pathFile)
 
 	// query
 	q := query.GetParameterDbQuery{PathFile: pathFile}
